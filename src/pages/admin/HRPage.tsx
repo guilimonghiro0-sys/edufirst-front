@@ -4,12 +4,12 @@ import { Users, Briefcase, Clock, DollarSign, Search, Download, Eye } from "luci
 import { Button } from "@/components/ui/button";
 
 const teachers = [
-  { id: 1, name: "M. Konaté Seydou", subject: "Mathématiques", contract: "CDI", since: "Sept 2019", hours: "18h/sem", salary: "450 000 FCFA", status: "Actif", avatar: "KS" },
-  { id: 2, name: "Mme. Touré Aminata", subject: "Français", contract: "CDI", since: "Sept 2020", hours: "20h/sem", salary: "420 000 FCFA", status: "Actif", avatar: "TA" },
-  { id: 3, name: "M. Bamba Ousmane", subject: "Physique-Chimie", contract: "CDD", since: "Jan 2024", hours: "16h/sem", salary: "380 000 FCFA", status: "Actif", avatar: "BO" },
-  { id: 4, name: "Mme. Diarra Fatoumata", subject: "Histoire-Géo", contract: "CDI", since: "Sept 2018", hours: "18h/sem", salary: "470 000 FCFA", status: "Congé", avatar: "DF" },
-  { id: 5, name: "M. Diarra Ibrahima", subject: "EPS", contract: "CDD", since: "Sept 2023", hours: "14h/sem", salary: "320 000 FCFA", status: "Actif", avatar: "DI" },
-  { id: 6, name: "Mme. Sanogo Marie", subject: "Anglais", contract: "CDI", since: "Sept 2021", hours: "16h/sem", salary: "400 000 FCFA", status: "Actif", avatar: "SM" },
+  { id: 1, name: "M. Raphael Kota", subject: "Mathématiques", contract: "CDI", since: "Sept 2019", hours: "18h/sem", salary: "450 000 FC", status: "Actif", avatar: "KS" },
+  { id: 2, name: "Mme. Aminata Kola", subject: "Français", contract: "CDI", since: "Sept 2020", hours: "20h/sem", salary: "420 000 FC", status: "Actif", avatar: "TA" },
+  { id: 3, name: "M. Benjamin Eloko", subject: "Physique-Chimie", contract: "CDD", since: "Jan 2024", hours: "16h/sem", salary: "380 000 FC", status: "Actif", avatar: "BO" },
+  { id: 4, name: "Mme. Didier Zola", subject: "Histoire-Géo", contract: "CDI", since: "Sept 2018", hours: "18h/sem", salary: "470 000 FC", status: "Congé", avatar: "DF" },
+  { id: 5, name: "M. Pappy Kasembe", subject: "EPS", contract: "CDD", since: "Sept 2023", hours: "14h/sem", salary: "320 000 FC", status: "Actif", avatar: "DI" },
+  { id: 6, name: "Mme. Michelle Bididi", subject: "Anglais", contract: "CDI", since: "Sept 2021", hours: "16h/sem", salary: "400 000 FC", status: "Actif", avatar: "SM" },
 ];
 
 const HRPage = () => {

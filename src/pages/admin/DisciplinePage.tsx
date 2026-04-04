@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 type Role = "admin" | "teacher";
 
 const incidents = [
-  { id: 1, student: "Amadou Diallo", class: "TS-A", type: "Absence", date: "12/03/2025", desc: "Absence non justifiée — cours de Physique", severity: "warning", teacher: "M. Konaté" },
-  { id: 2, student: "Fatou Coulibaly", class: "1ère S-B", type: "Retard", date: "11/03/2025", desc: "Retard de 20 minutes — cours de Français", severity: "info", teacher: "Mme. Touré" },
-  { id: 3, student: "Ibrahim Traoré", class: "TS-A", type: "Avertissement", date: "10/03/2025", desc: "Comportement perturbateur en classe", severity: "error", teacher: "M. Bamba" },
-  { id: 4, student: "Aïcha Koné", class: "2nde C", type: "Absence", date: "10/03/2025", desc: "Absence justifiée — certificat médical fourni", severity: "success", teacher: "Mme. Touré" },
-  { id: 5, student: "Moussa Sylla", class: "TS-B", type: "Retard", date: "09/03/2025", desc: "Retard de 10 minutes — EPS", severity: "info", teacher: "M. Diarra" },
-  { id: 6, student: "Kadi Ouattara", class: "1ère S-A", type: "Avertissement", date: "08/03/2025", desc: "Utilisation du téléphone en classe", severity: "error", teacher: "M. Konaté" },
+  { id: 1, student: "Kalala Mbangi", class: "8eme", type: "Absence", date: "12/03/2026", desc: "Absence non justifiée — cours de Physique", severity: "warning", teacher: "M. Mamba" },
+  { id: 2, student: "Fatou Mata", class: "1ère Latin-philo", type: "Retard", date: "11/03/2026", desc: "Retard de 20 minutes — cours de Français", severity: "info", teacher: "Mme. Mbamba" },
+  { id: 3, student: "Ibrahim Salama", class: "3eme Electronique", type: "Avertissement", date: "10/03/2026", desc: "Comportement perturbateur en classe", severity: "error", teacher: "M. Mbuyi" },
+  { id: 4, student: "Aïcha Pembele", class: "2eme C", type: "Absence", date: "10/03/2026", desc: "Absence justifiée — certificat médical fourni", severity: "success", teacher: "Mme. Therèse" },
+  { id: 5, student: "Feza Safari", class: "5eme primaire", type: "Retard", date: "09/03/2026", desc: "Retard de 10 minutes — EPS", severity: "info", teacher: "M. Didier" },
+  { id: 6, student: "Jeremie Kayoyo", class: "4eme Bio-chimie", type: "Avertissement", date: "08/03/2026", desc: "Utilisation du téléphone en classe", severity: "error", teacher: "M. Didi" },
 ];
 
 const stats = [

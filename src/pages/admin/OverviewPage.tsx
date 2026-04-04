@@ -32,7 +32,7 @@ const OverviewPage = () => (
 
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
       {[
-        { label: "Revenus totaux", value: `${(totals.revenue / 1e6).toFixed(1)}M FCFA`, icon: DollarSign },
+        { label: "Revenus totaux", value: `${(totals.revenue / 1e6).toFixed(1)}M $`, icon: DollarSign },
         { label: "Élèves inscrits", value: totals.students.toLocaleString(), icon: Users },
         { label: "Enseignants", value: totals.teachers, icon: Building2 },
       ].map((s) => (
@@ -54,7 +54,7 @@ const OverviewPage = () => (
 
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
       <div className="lg:col-span-2 edu-card p-6">
-        <h3 className="text-sm font-semibold text-foreground mb-4">Revenus par extension (×1000 FCFA)</h3>
+        <h3 className="text-sm font-semibold text-foreground mb-4">Revenus par extension (×1000 $)</h3>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={revenueByMonth}>
@@ -117,7 +117,7 @@ const OverviewPage = () => (
                 </td>
                 <td className="px-6 py-3 text-sm text-foreground tabular-nums">{c.students}</td>
                 <td className="px-6 py-3 text-sm text-foreground tabular-nums">{c.teachers}</td>
-                <td className="px-6 py-3 text-sm text-foreground tabular-nums">{(c.revenue / 1e6).toFixed(1)}M FCFA</td>
+                <td className="px-6 py-3 text-sm text-foreground tabular-nums">{(c.revenue / 1e6).toFixed(1)}M FC</td>
               </tr>
             ))}
           </tbody>

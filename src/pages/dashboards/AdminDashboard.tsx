@@ -12,17 +12,17 @@ const revenueData = [
 ];
 
 const stats = [
-  { label: "Revenus trimestriels", value: "15 800 000 FCFA", change: "+12.5%", up: true, icon: DollarSign },
+  { label: "Revenus trimestriels", value: " $15 800 000", change: "+12.5%", up: true, icon: DollarSign },
   { label: "Étudiants inscrits", value: "1 247", change: "+48", up: true, icon: Users },
-  { label: "Ventes EduStore", value: "342 000 FCFA", change: "+8.3%", up: true, icon: ShoppingBag },
+  { label: "Ventes EduStore", value: "$342 000", change: "+8.3%", up: true, icon: ShoppingBag },
   { label: "Croissance", value: "+23%", change: "vs Q3", up: true, icon: TrendingUp },
 ];
 
 const activity = [
   { time: "Il y a 5 min", text: "Inscription de 3 nouveaux étudiants en Terminale S", type: "info" },
-  { time: "Il y a 12 min", text: "Paiement reçu — Famille Diallo (Trimestre 2)", type: "success" },
+  { time: "Il y a 12 min", text: "Paiement reçu — Famille Nzeza (Trimestre 2)", type: "success" },
   { time: "Il y a 30 min", text: "Stock faible : Cahiers de mathématiques (12 restants)", type: "warning" },
-  { time: "Il y a 1h", text: "Rapport de notes Q2 généré par M. Konaté", type: "info" },
+  { time: "Il y a 1h", text: "Rapport de notes Q2 généré par M. Pungu", type: "info" },
   { time: "Il y a 2h", text: "Nouvelle commande EduStore — Kit scientifique Premium", type: "success" },
 ];
 
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
                 <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="#94a3b8" />
                 <YAxis tick={{ fontSize: 12 }} stroke="#94a3b8" tickFormatter={(v) => `${v / 1000000}M`} />
                 <Tooltip
-                  formatter={(value: number) => [`${value.toLocaleString()} FCFA`, "Revenus"]}
+                  formatter={(value: number) => [`${value.toLocaleString()} $`, "Revenus"]}
                   contentStyle={{ borderRadius: 12, border: "none", boxShadow: "var(--shadow-surface)" }}
                 />
                 <Area type="monotone" dataKey="revenue" stroke="#9156FF" strokeWidth={2} fill="url(#colorRevenue)" />
@@ -100,9 +100,8 @@ const AdminDashboard = () => {
           <div className="mt-4 space-y-4">
             {activity.map((a, i) => (
               <div key={i} className="flex gap-3">
-                <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
-                  a.type === "success" ? "bg-emerald-500" : a.type === "warning" ? "bg-amber-500" : "bg-primary"
-                }`} />
+                <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${a.type === "success" ? "bg-emerald-500" : a.type === "warning" ? "bg-amber-500" : "bg-primary"
+                  }`} />
                 <div>
                   <p className="text-sm text-foreground leading-snug">{a.text}</p>
                   <span className="text-xs text-muted">{a.time}</span>
@@ -136,7 +135,7 @@ const AdminDashboard = () => {
                   <td className="px-6 py-3">
                     <span className={
                       item.status === "Critique" ? "status-error" :
-                      item.status === "Faible" ? "status-pending" : "status-success"
+                        item.status === "Faible" ? "status-pending" : "status-success"
                     }>
                       {item.status}
                     </span>

@@ -29,6 +29,7 @@ import HonorBoardPage from "./pages/shared/HonorBoardPage";
 import ChildrenPage from "./pages/parent/ChildrenPage";
 import WalletPage from "./pages/parent/WalletPage";
 import NotFound from "./pages/NotFound";
+import Finances from "./pages/dashboards/Finances";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/dashboard/admin/overview" element={<OverviewPage />} />
           <Route path="/dashboard/admin/students" element={<StudentsPage />} />
           <Route path="/dashboard/admin/access" element={<AccessManagementPage />} />
+          <Route path="/dashboard/admin/finances" element={<Finances />} />
           <Route path="/dashboard/admin/discipline" element={<DisciplinePage role="admin" />} />
           <Route path="/dashboard/admin/hr" element={<HRPage />} />
           <Route path="/dashboard/admin/calendar" element={<CalendarPage role="admin" />} />

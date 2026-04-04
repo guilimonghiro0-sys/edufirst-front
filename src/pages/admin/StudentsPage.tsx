@@ -17,25 +17,25 @@ interface Student {
 }
 
 const studentsData: Student[] = [
-  { id: "STU-001", name: "Aminata Diallo", email: "aminata.d@lycee-vh.edu", phone: "+225 07 12 34 56", class: "Terminale S", level: "TS1", average: 15.2, status: "Actif", paid: true },
-  { id: "STU-002", name: "Kouadio Yao", email: "k.yao@lycee-vh.edu", phone: "+225 05 98 76 54", class: "Terminale S", level: "TS1", average: 13.8, status: "Actif", paid: true },
-  { id: "STU-003", name: "Fatoumata Traoré", email: "f.traore@lycee-vh.edu", phone: "+225 01 23 45 67", class: "Première S", level: "1S2", average: 14.5, status: "Actif", paid: false },
-  { id: "STU-004", name: "Ibrahim Koné", email: "i.kone@lycee-vh.edu", phone: "+225 07 65 43 21", class: "Seconde A", level: "2A1", average: 11.3, status: "En attente", paid: false },
-  { id: "STU-005", name: "Marie-Claire Bamba", email: "mc.bamba@lycee-vh.edu", phone: "+225 05 11 22 33", class: "Terminale S", level: "TS2", average: 16.1, status: "Actif", paid: true },
-  { id: "STU-006", name: "Sékou Ouattara", email: "s.ouattara@lycee-vh.edu", phone: "+225 01 44 55 66", class: "Première S", level: "1S1", average: 12.7, status: "Suspendu", paid: false },
-  { id: "STU-007", name: "Aïssatou Coulibaly", email: "a.coulibaly@lycee-vh.edu", phone: "+225 07 77 88 99", class: "Seconde A", level: "2A2", average: 14.9, status: "Actif", paid: true },
-  { id: "STU-008", name: "Jean-Baptiste N'Guessan", email: "jb.nguessan@lycee-vh.edu", phone: "+225 05 00 11 22", class: "Terminale S", level: "TS1", average: 13.2, status: "Actif", paid: true },
-  { id: "STU-009", name: "Mariame Sanogo", email: "m.sanogo@lycee-vh.edu", phone: "+225 01 33 44 55", class: "Première S", level: "1S2", average: 15.7, status: "Actif", paid: true },
-  { id: "STU-010", name: "Drissa Keita", email: "d.keita@lycee-vh.edu", phone: "+225 07 66 77 88", class: "Seconde A", level: "2A1", average: 10.5, status: "En attente", paid: false },
+  { id: "STU-001", name: "Rachel Mata", email: "rachel.mata@lycee-vh.edu", phone: "+243 99 12 34 56", class: "4eme Latin-philo", level: "4eme", average: 15.2, status: "Actif", paid: true },
+  { id: "STU-002", name: "Elisah Kasembe", email: "e.kasembe@lycee-vh.edu", phone: "+243 82 98 76 54", class: "4eme Biochimie", level: "4eme", average: 13.8, status: "Actif", paid: true },
+  { id: "STU-003", name: "Manacé Zola", email: "manacé.z@lycee-vh.edu", phone: "+243 84 23 45 67", class: "4eme Math-Phi", level: "4eme", average: 14.5, status: "Actif", paid: false },
+  { id: "STU-004", name: "Roddy Zola", email: "roddy.z@lycee-vh.edu", phone: "+243 81 65 43 21", class: "4eme Electronique A", level: "4eme", average: 11.3, status: "En attente", paid: false },
+  { id: "STU-005", name: "Erick Ngeleka", email: "erick.ngeleka@lycee-vh.edu", phone: "+243 85 11 22 33", class: "1ere Electricité", level: "1ere", average: 16.1, status: "Actif", paid: true },
+  { id: "STU-006", name: "Parfait Mavungu", email: "parfait.mavungu@lycee-vh.edu", phone: "+243 85 44 55 66", class: "2eme Péda", level: "2eme", average: 12.7, status: "Suspendu", paid: false },
+  { id: "STU-007", name: "Gad Mbuyi", email: "gad.mbuyi@lycee-vh.edu", phone: "+243 85 15 00 251", class: "3eme Nutrition", level: "3eme", average: 14.9, status: "Actif", paid: true },
+  { id: "STU-008", name: "Josué Ngoy", email: "josue.ngoy@lycee-vh.edu", phone: "+243 80 00 11 222", class: "2eme Math-Phi", level: "2eme", average: 13.2, status: "Actif", paid: true },
+  { id: "STU-009", name: "Mariame Songo", email: "mariame.songo@lycee-vh.edu", phone: "+243 99 33 44_55", class: "1ere Scientifique", level: "1ere", average: 15.7, status: "Actif", paid: true },
+  { id: "STU-010", name: "Adris Mbala", email: "adris.mbala@lycee-vh.edu", phone: "+243 90 66 77 88", class: "4eme Electronique A", level: "4eme", average: 10.5, status: "En attente", paid: false },
 ];
 
-const levels = ["Tous", "Terminale S", "Première S", "Seconde A"];
+const levels = ["Tous", "1ere", "2eme", "3eme", "4eme"];
 
 const StudentsPage = () => {
   const [search, setSearch] = useState("");
   const [levelFilter, setLevelFilter] = useState("Tous");
 
-  const filtered = studentsData.filter((s) => {
+  const filtered = studentsData.filter(s => {
     const matchesSearch = s.name.toLowerCase().includes(search.toLowerCase()) || s.id.toLowerCase().includes(search.toLowerCase());
     const matchesLevel = levelFilter === "Tous" || s.class === levelFilter;
     return matchesSearch && matchesLevel;
@@ -71,11 +71,10 @@ const StudentsPage = () => {
               <button
                 key={level}
                 onClick={() => setLevelFilter(level)}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  levelFilter === level
-                    ? "bg-primary/10 text-primary"
-                    : "bg-background text-muted hover:text-foreground"
-                }`}
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${levelFilter === level
+                  ? "bg-primary/10 text-primary"
+                  : "bg-background text-muted hover:text-foreground"
+                  }`}
               >
                 {level}
               </button>
@@ -146,7 +145,7 @@ const StudentsPage = () => {
                   <td className="px-6 py-3.5">
                     <span className={
                       student.status === "Actif" ? "status-success" :
-                      student.status === "En attente" ? "status-pending" : "status-error"
+                        student.status === "En attente" ? "status-pending" : "status-error"
                     }>
                       {student.status}
                     </span>

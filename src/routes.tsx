@@ -18,8 +18,14 @@ import RegisterParent from './pages/RegisterParent';
 import GradesEntryPage from './pages/teacher/GradesEntryPage';
 import ChildrenPage from './pages/parent/ChildrenPage';
 import WalletPage from './pages/parent/WalletPage';
+import Finances from './pages/dashboards/Finances';
 
 export const router = createBrowserRouter([
+
+    {
+        path: '/admin/finances',
+        element: <Finances />,
+    },
     {
         path: '/register/teacher',
         element: <RegisterTeacher />,

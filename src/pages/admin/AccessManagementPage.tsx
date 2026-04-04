@@ -36,14 +36,14 @@ const statusStyles: Record<string, string> = {
 const statusLabels: Record<string, string> = { active: "Actif", pending: "En attente", suspended: "Suspendu" };
 
 const accounts: Account[] = [
-  { id: "1", name: "Amadou Diallo", email: "amadou@edufirst.com", role: "admin", status: "active", createdAt: "Sept 2024", initials: "AD" },
-  { id: "2", name: "Fatou Sow", email: "fatou.sow@edufirst.com", role: "teacher", status: "active", createdAt: "Oct 2024", initials: "FS" },
-  { id: "3", name: "Ousmane Fall", email: "ousmane.f@edufirst.com", role: "teacher", status: "active", createdAt: "Oct 2024", initials: "OF" },
-  { id: "4", name: "Moussa Ndiaye", email: "moussa.n@edufirst.com", role: "student", status: "active", createdAt: "Jan 2025", initials: "MN" },
-  { id: "5", name: "Awa Diop", email: "awa.d@edufirst.com", role: "student", status: "pending", createdAt: "Mar 2025", initials: "AD" },
-  { id: "6", name: "Aïssatou Ba", email: "aissatou@email.com", role: "parent", status: "active", createdAt: "Nov 2024", initials: "AB" },
-  { id: "7", name: "Ibrahima Sy", email: "ibrahima.s@email.com", role: "parent", status: "suspended", createdAt: "Dec 2024", initials: "IS" },
-  { id: "8", name: "Khady Mbaye", email: "khady.m@edufirst.com", role: "student", status: "active", createdAt: "Jan 2025", initials: "KM" },
+  { id: "1", name: "Kalala Masudi", email: "kalala.m@edufirst.io", role: "student", status: "active", createdAt: "Sept 2026", initials: "AD" },
+  { id: "2", name: "Fatou Mata", email: "fatou.mata@edufirst.io", role: "teacher", status: "active", createdAt: "Oct 2026", initials: "FM" },
+  { id: "3", name: "Mbenza Kabongo", email: "mbenza.k@edufirst.io", role: "teacher", status: "active", createdAt: "Oct 2026", initials: "MK" },
+  { id: "4", name: "Mwassa Kitenge", email: "mwassa.k@edufirst.io", role: "student", status: "active", createdAt: "Jan 2026", initials: "MN" },
+  { id: "5", name: "Nshuo Tshela", email: "nshuo.t@edufirst.io", role: "student", status: "pending", createdAt: "Mar 2026", initials: "NT" },
+  { id: "6", name: "Mwamba Ngwen", email: "mwamba.n@edufirst.io", role: "parent", status: "active", createdAt: "Nov 2026", initials: "MN" },
+  { id: "7", name: "Luzolo Mambi", email: "luzolo.m@email.com", role: "parent", status: "suspended", createdAt: "Dec 2026", initials: "LM" },
+  { id: "8", name: "Mbiye Mbaye", email: "mbiye.m@edufirst.io", role: "student", status: "active", createdAt: "Jan 2026", initials: "MM" },
 ];
 
 const AccessManagementPage = () => {
