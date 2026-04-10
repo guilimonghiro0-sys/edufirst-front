@@ -3,6 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { School, User, Users, GraduationCap, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import apiClient from "@/api/client";
+import { useAuthStore } from "@/store/authStore";
+import { toast } from "sonner";
 
 type Role = "admin" | "teacher" | "student" | "parent";
 
@@ -16,18 +19,52 @@ const roles: { id: Role; label: string; icon: React.ElementType; description: st
 const Login = () => {
   const [selectedRole, setSelectedRole] = useState<Role>("admin");
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const setAuth = useAuthStore((state) => state.setAuth);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate(`/dashboard/${selectedRole}`);
+    setIsLoading(true);
+    try {
+      const response = await apiClient.post('/auth/login/', {
+        username: email,
+        password: password,
+      });
+      const { access, refresh, user } = response.data;
+      setAuth(user, access, refresh);
+      toast.success("Connexion réussie");
+      // Redirection selon le rôle réel
+      switch (user.role) {
+        case "admin":
+          navigate("/admin/dashboard");
+          break;
+        case "teacher":
+          navigate("/teacher/dashboard");
+          break;
+        case "parent":
+          navigate("/parent/dashboard");
+          break;
+        case "student":
+          navigate("/student/dashboard");
+          break;
+        default:
+          navigate("/dashboard");
+      }
+    } catch (error: any) {
+      const message = error.response?.data?.detail || "Email ou mot de passe incorrect";
+      toast.error(message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen flex">
-      {/* Left - Branding */}
+      {/* Left - Branding (inchangé) */}
       <div className="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden items-center justify-center p-12">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-64 h-64 rounded-full bg-primary-foreground/20 blur-3xl" />
@@ -72,19 +109,19 @@ const Login = () => {
           <h2 className="text-2xl font-bold text-foreground mb-1">Connexion</h2>
           <p className="text-muted mb-8">Accédez à votre espace de gestion scolaire.</p>
 
-          {/* Role Selector */}
+          {/* Role Selector (purement visuel, n'affecte pas l'authentification) */}
           <div className="grid grid-cols-4 gap-2 mb-8">
             {roles.map((role) => {
               const isActive = selectedRole === role.id;
               return (
                 <button
                   key={role.id}
+                  type="button"
                   onClick={() => setSelectedRole(role.id)}
-                  className={`flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all duration-200 ${
-                    isActive
-                      ? "bg-primary/10 ring-2 ring-primary"
-                      : "bg-card shadow-surface hover:shadow-md"
-                  }`}
+                  className={`flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all duration-200 ${isActive
+                    ? "bg-primary/10 ring-2 ring-primary"
+                    : "bg-card shadow-surface hover:shadow-md"
+                    }`}
                 >
                   <role.icon className={`w-5 h-5 ${isActive ? "text-primary" : "text-muted"}`} />
                   <span className={`text-xs font-medium ${isActive ? "text-primary" : "text-foreground"}`}>
@@ -97,13 +134,14 @@ const Login = () => {
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
+              <label className="block text-sm font-medium text-foreground mb-1.5">Identifiant</label>
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@lycee-international.edu"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="admin"
                 className="w-full h-11 px-4 rounded-lg bg-card shadow-surface text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
+                required
               />
             </div>
             <div>
@@ -115,6 +153,7 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="w-full h-11 px-4 pr-11 rounded-lg bg-card shadow-surface text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
+                  required
                 />
                 <button
                   type="button"
@@ -126,8 +165,8 @@ const Login = () => {
               </div>
             </div>
 
-            <Button type="submit" variant="hero" className="w-full" size="lg">
-              Lancer le tableau de bord
+            <Button type="submit" variant="hero" className="w-full" size="lg" disabled={isLoading}>
+              {isLoading ? "Connexion en cours..." : "Lancer le tableau de bord"}
             </Button>
           </form>
 

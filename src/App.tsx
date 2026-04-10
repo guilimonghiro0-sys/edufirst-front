@@ -7,10 +7,10 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Onboarding from "./pages/Onboarding";
-import AdminDashboard from "./pages/dashboards/AdminDashboard";
-import TeacherDashboard from "./pages/dashboards/TeacherDashboard";
-import StudentDashboard from "./pages/dashboards/StudentDashboard";
-import ParentDashboard from "./pages/dashboards/ParentDashboard";
+import AdminDashboard from "./pages/admin/dashboards/AdminDashboard";
+import TeacherDashboard from "./pages/admin/dashboards/TeacherDashboard";
+import StudentDashboard from "./pages/admin/dashboards/StudentDashboard";
+import ParentDashboard from "./pages/admin/dashboards/ParentDashboard";
 import StudentsPage from "./pages/admin/StudentsPage";
 import AccessManagementPage from "./pages/admin/AccessManagementPage";
 import OverviewPage from "./pages/admin/OverviewPage";
@@ -28,8 +28,10 @@ import SchoolWallPage from "./pages/shared/SchoolWallPage";
 import HonorBoardPage from "./pages/shared/HonorBoardPage";
 import ChildrenPage from "./pages/parent/ChildrenPage";
 import WalletPage from "./pages/parent/WalletPage";
+import RegisterInscription from "./pages/RegisterInscription";
 import NotFound from "./pages/NotFound";
-import Finances from "./pages/dashboards/Finances";
+import RegistrationsPage from "./pages/admin/RegistrationsPage";
+import Finances from "./pages/admin/Finances";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +45,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/register/inscription" element={<RegisterInscription />} />
           <Route path="/onboarding" element={<Onboarding />} />
 
           {/* Admin */}
@@ -50,6 +53,7 @@ const App = () => (
           <Route path="/dashboard/admin/overview" element={<OverviewPage />} />
           <Route path="/dashboard/admin/students" element={<StudentsPage />} />
           <Route path="/dashboard/admin/access" element={<AccessManagementPage />} />
+          <Route path="/dashboard/admin/registrations" element={<RegistrationsPage />} />
           <Route path="/dashboard/admin/finances" element={<Finances />} />
           <Route path="/dashboard/admin/discipline" element={<DisciplinePage role="admin" />} />
           <Route path="/dashboard/admin/hr" element={<HRPage />} />

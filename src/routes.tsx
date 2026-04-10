@@ -11,14 +11,16 @@ import HRPage from './pages/admin/HRPage';
 import TransportPage from './pages/admin/TransportPage';
 import AccessManagementPage from './pages/admin/AccessManagementPage';
 import StudentDetails from './pages/shared/StudentDetails';
+import AdminAddStudentPage from './pages/admin/AdminAddStudentPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import RegisterTeacher from './pages/RegisterTeacher';
 import RegisterStudent from './pages/RegisterStudent';
-import RegisterParent from './pages/RegisterParent';
+import RegisterInscription from './pages/RegisterInscription';
 import GradesEntryPage from './pages/teacher/GradesEntryPage';
+import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import ChildrenPage from './pages/parent/ChildrenPage';
 import WalletPage from './pages/parent/WalletPage';
-import Finances from './pages/dashboards/Finances';
+import Finances from './pages/admin/dashboards/Finances';
 
 export const router = createBrowserRouter([
 
@@ -35,8 +37,8 @@ export const router = createBrowserRouter([
         element: <RegisterStudent />,
     },
     {
-        path: '/register/parent',
-        element: <RegisterParent />,
+        path: '/register/inscription',
+        element: <RegisterInscription />,
     },
     {
         path: '/onboarding/school',
@@ -61,6 +63,7 @@ export const router = createBrowserRouter([
             { index: true, element: <Navigate to="dashboard" replace /> },
             { path: 'dashboard', element: <OverviewPage /> },
             { path: 'students', element: <StudentsPage /> },
+            { path: 'students/add', element: <AdminAddStudentPage /> },
             { path: 'discipline', element: <DisciplinePage /> },
             { path: 'hr', element: <HRPage /> },
             { path: 'transport', element: <TransportPage /> },
@@ -77,7 +80,7 @@ export const router = createBrowserRouter([
         element: <ProtectedRoute allowedRoles={['teacher']}><DashboardLayout /></ProtectedRoute>,
         children: [
             { index: true, element: <Navigate to="dashboard" replace /> },
-            { path: 'dashboard', element: <div>Dashboard Enseignant</div> },
+            { path: 'dashboard', element: <TeacherDashboard /> },
             { path: 'grades', element: <GradesEntryPage /> },
             // autres routes teacher...
         ],

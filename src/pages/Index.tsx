@@ -496,7 +496,7 @@ const Index = () => {
             <div>
               <h4 className="font-bold text-background mb-4">Contact</h4>
               <ul className="space-y-2 text-sm text-background/60">
-                <li className="flex items-center gap-2"><Globe className="w-4 h-4" /> edufirst.app</li>
+                <li className="flex items-center gap-2"><Globe className="w-4 h-4" />edufirst.io</li>
                 <li className="flex items-center gap-2"><Shield className="w-4 h-4" /> Données sécurisées</li>
               </ul>
             </div>

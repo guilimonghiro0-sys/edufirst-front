@@ -168,7 +168,7 @@ const Register = () => {
 
                 <div className="space-y-1.5">
                   <Label htmlFor="gender">Genre *</Label>
-                  <select id="gender" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={form.gender} onChange={(e) => setForm({ ...form, gender: e.target.value })} required>
+                  <select id="gender" title="Genre" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={form.gender} onChange={(e) => setForm({ ...form, gender: e.target.value })} required>
                     <option value="">Choisir</option>
                     <option value="M">Masculin</option>
                     <option value="F">Féminin</option>
@@ -185,7 +185,7 @@ const Register = () => {
 
                 <div className="space-y-1.5">
                   <Label htmlFor="province">Province d’origine *</Label>
-                  <select id="province" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={form.province} onChange={(e) => setForm({ ...form, province: e.target.value })} required>
+                  <select id="province" title="Province d’origine" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={form.province} onChange={(e) => setForm({ ...form, province: e.target.value })} required>
                     <option value="">Choisir une province</option>
                     {provinces.map((p) => (
                       <option key={p} value={p}>{p}</option>
@@ -235,6 +235,17 @@ const Register = () => {
               </motion.form>
             )}
           </AnimatePresence>
+
+          <div className="rounded-3xl border border-border bg-secondary p-4 text-sm text-muted-foreground">
+            <p className="font-semibold text-foreground">Vous souhaitez inscrire un élève ?</p>
+            <p>Utilisez le formulaire dédié pour soumettre une demande et laisser l'établissement valider l'inscription.</p>
+            <Link
+              to="/register/inscription"
+              className="mt-3 inline-flex rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+            >
+              Ouvrir le formulaire d'inscription
+            </Link>
+          </div>
 
           <p className="text-center text-sm text-muted-foreground">
             Déjà un compte ?{" "}

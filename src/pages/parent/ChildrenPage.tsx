@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, User, GraduationCap, BarChart3, X, Search } from "lucide-react";
+import { Plus, User, GraduationCap, BarChart3, X, Search, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface Child {
   id: string;
@@ -34,6 +35,7 @@ const initialChildren: Child[] = [
 
 const ChildrenPage = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [children, setChildren] = useState<Child[]>(initialChildren);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [searchCode, setSearchCode] = useState("");
@@ -68,6 +70,32 @@ const ChildrenPage = () => {
             <Plus className="w-4 h-4" /> Ajouter un enfant
           </Button>
         </div>
+
+        {/* Inscription message */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4"
+        >
+          <div className="flex items-start gap-3">
+            <UserPlus className="w-5 h-5 text-blue-600 mt-0.5" />
+            <div className="flex-1">
+              <h3 className="font-semibold text-blue-900 mb-1">Vous souhaitez inscrire un élève ?</h3>
+              <p className="text-sm text-blue-700 mb-3">
+                Utilisez le formulaire dédié pour soumettre une demande et laisser l'établissement valider l'inscription.
+              </p>
+              <Button
+                onClick={() => navigate('/register/inscription')}
+                variant="outline"
+                size="sm"
+                className="border-blue-300 text-blue-700 hover:bg-blue-50"
+              >
+                Ouvrir le formulaire d'inscription
+              </Button>
+            </div>
+          </div>
+        </motion.div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <AnimatePresence>

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
-import { Search, Plus, Filter, ChevronDown, MoreHorizontal, Mail, Phone } from "lucide-react";
+import { Search, Plus, Filter, ChevronDown, MoreHorizontal, Mail, Phone, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 interface Student {
   id: string;
@@ -32,6 +33,7 @@ const studentsData: Student[] = [
 const levels = ["Tous", "1ere", "2eme", "3eme", "4eme"];
 
 const StudentsPage = () => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [levelFilter, setLevelFilter] = useState("Tous");
 
@@ -48,8 +50,9 @@ const StudentsPage = () => {
           <h1 className="text-2xl font-bold text-foreground">Étudiants</h1>
           <p className="text-muted text-sm mt-1">{studentsData.length} inscrits — Lycée International Victor Hugo</p>
         </div>
-        <Button variant="hero" size="default">
-          <Plus className="w-4 h-4" /> Ajouter un étudiant
+        <Button onClick={() => navigate('/admin/students/add')} variant="hero" className="flex items-center gap-2">
+          <UserPlus className="w-4 h-4" />
+          Ajouter un élève
         </Button>
       </div>
 
@@ -126,10 +129,10 @@ const StudentsPage = () => {
                   </td>
                   <td className="px-6 py-3.5 hidden lg:table-cell">
                     <div className="flex items-center gap-3">
-                      <a href={`mailto:${student.email}`} className="text-muted hover:text-primary transition-colors">
+                      <a href={`mailto:${student.email}`} className="text-muted hover:text-primary transition-colors" aria-label={`Envoyer un email à ${student.name}`}>
                         <Mail className="w-3.5 h-3.5" />
                       </a>
-                      <a href={`tel:${student.phone}`} className="text-muted hover:text-primary transition-colors">
+                      <a href={`tel:${student.phone}`} className="text-muted hover:text-primary transition-colors" aria-label={`Appeler ${student.name}`}>
                         <Phone className="w-3.5 h-3.5" />
                       </a>
                     </div>
@@ -151,7 +154,7 @@ const StudentsPage = () => {
                     </span>
                   </td>
                   <td className="px-6 py-3.5">
-                    <button className="p-1.5 rounded-lg hover:bg-secondary transition-colors">
+                    <button className="p-1.5 rounded-lg hover:bg-secondary transition-colors" aria-label="Actions pour l'étudiant">
                       <MoreHorizontal className="w-4 h-4 text-muted" />
                     </button>
                   </td>

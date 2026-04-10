@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useAuthStore } from '@/store/authStore';
 
 const apiClient = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL,
+    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000',
     withCredentials: true,
 });
 
@@ -12,7 +12,6 @@ apiClient.interceptors.request.use((config) => {
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
-    // Si tu utilises le multi-tenancy par sous-domaine, tu peux ajouter un header X-Tenant-ID ici
     return config;
 });
 
@@ -25,14 +24,13 @@ apiClient.interceptors.response.use(
             originalRequest._retry = true;
             try {
                 const refreshToken = useAuthStore.getState().refreshToken;
-                const { data } = await axios.post(
-                    `${import.meta.env.VITE_API_BASE_URL}/auth/refresh/`,
-                    { refresh: refreshToken }
-                );
+                const { data } = await apiClient.post('/auth/refresh', {
+                    refreshToken,
+                });
                 useAuthStore.getState().setAuth(
                     useAuthStore.getState().user!,
                     data.access,
-                    data.refresh
+                    data.refresh,
                 );
                 originalRequest.headers.Authorization = `Bearer ${data.access}`;
                 return apiClient(originalRequest);
