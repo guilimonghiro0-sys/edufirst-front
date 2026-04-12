@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-// Assuming you have an auth store or context for user roles
-// For now, placeholder - you need to implement actual auth logic
+import { useAuthStore } from '@/store/authStore';
 
 interface ProtectedRouteProps {
     children: ReactNode;
@@ -9,16 +8,13 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
-    // Placeholder: check if user is authenticated and has required role
-    // const { user, isAuthenticated } = useAuth(); // Implement this
-    const isAuthenticated = true; // Placeholder
-    const userRole = 'admin'; // Placeholder
+    const { user, isAuthenticated } = useAuthStore();
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !user) {
         return <Navigate to="/login" replace />;
     }
 
-    if (!allowedRoles.includes(userRole)) {
+    if (!allowedRoles.includes(user.role)) {
         return <Navigate to="/unauthorized" replace />;
     }
 

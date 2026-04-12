@@ -15,13 +15,11 @@ const roles: { id: Role; label: string; icon: React.ElementType; description: st
   { id: "student", label: "Étudiant", icon: User, description: "Apprentissage" },
   { id: "parent", label: "Parent", icon: Users, description: "Suivi" },
 ];
-
 const Login = () => {
   const [selectedRole, setSelectedRole] = useState<Role>("admin");
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -31,11 +29,14 @@ const Login = () => {
     setIsLoading(true);
     try {
       const response = await apiClient.post('/auth/login/', {
-        username: email,
+        username: username,   // ← corrigé
         password: password,
-      });
+      });;
+      console.log("Response data:", response.data);
       const { access, refresh, user } = response.data;
       setAuth(user, access, refresh);
+      console.log("Utilisateur connecté :", user);
+      console.log("Redirection vers :", `/${user.role}/dashboard`);
       toast.success("Connexion réussie");
       // Redirection selon le rôle réel
       switch (user.role) {
@@ -52,7 +53,8 @@ const Login = () => {
           navigate("/student/dashboard");
           break;
         default:
-          navigate("/dashboard");
+          console.error("Rôle reçu :", user.role);
+          navigate("/login");
       }
     } catch (error: any) {
       const message = error.response?.data?.detail || "Email ou mot de passe incorrect";

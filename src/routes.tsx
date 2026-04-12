@@ -21,6 +21,8 @@ import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import ChildrenPage from './pages/parent/ChildrenPage';
 import WalletPage from './pages/parent/WalletPage';
 import Finances from './pages/admin/dashboards/Finances';
+import AdminDashboard from './pages/admin/dashboards/AdminDashboard';
+import AdminDashboardPage from './pages/admin/dashboards/AdminDashboardPage';
 
 export const router = createBrowserRouter([
 
@@ -58,10 +60,10 @@ export const router = createBrowserRouter([
     },
     {
         path: '/admin',
-        element: <ProtectedRoute allowedRoles={['admin']}><DashboardLayout /></ProtectedRoute>,
+        element: <ProtectedRoute allowedRoles={['admin']}><AdminDashboard /></ProtectedRoute>,
         children: [
             { index: true, element: <Navigate to="dashboard" replace /> },
-            { path: 'dashboard', element: <OverviewPage /> },
+            { path: 'dashboard', element: <AdminDashboardPage /> },
             { path: 'students', element: <StudentsPage /> },
             { path: 'students/add', element: <AdminAddStudentPage /> },
             { path: 'discipline', element: <DisciplinePage /> },
