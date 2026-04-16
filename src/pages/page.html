@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFirst - Connexion Banger</title>
+    <!-- Chargement des dépendances -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-purple': '#8b5cf6',
+                        'brand-blue': '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white">
+
+<div class="h-screen flex font-sans antialiased overflow-hidden">
+  
+  <!-- CÔTÉ GAUCHE : LE VISUEL (COULEUR + TEXTE + COLLAGE) -->
+  <div class="hidden lg:flex flex-1 bg-cyan-50 flex-col justify-center items-center p-12 relative">
+    
+    <div class="text-center max-w-sm mb-16 relative z-20">
+      <h2 class="text-5xl font-extrabold text-slate-900 leading-tight">
+        Explorez les <span class="text-blue-600">sujets</span> que vous aimez.
+      </h2>
+    </div>
+
+    <!-- LE COLLAGE D'IMAGES -->
+    <div class="w-full max-w-lg h-96 relative flex justify-center items-center">
+      
+      <!-- Petite icône flottante gauche -->
+      <div class="absolute -left-16 top-10 z-10 p-2 bg-white rounded-3xl shadow-xl transform rotate-3">
+        <img src="https://emojiguide.org/images/emoji/c/2vwn_1f917_263a.png" class="w-20 h-20 rounded-2xl" alt="Emoji">
+      </div>
+
+      <!-- Image principale centrale -->
+      <div class="absolute top-0 z-30 p-2 bg-white rounded-3xl shadow-2xl transform -rotate-3 border-2 border-white">
+        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=400&auto=format&fit=crop" class="w-64 h-80 rounded-2xl object-cover" alt="Étudiante">
+      </div>
+
+      <!-- Icône flottante droite -->
+      <div class="absolute -right-16 bottom-10 z-10 p-2 bg-white rounded-3xl shadow-xl transform -rotate-12 flex items-center justify-center w-24 h-24">
+        <i data-lucide="heart" class="text-red-500 w-12 h-12 fill-current"></i>
+      </div>
+
+    </div>
+
+    <!-- Décorations de fond -->
+    <div class="absolute top-10 left-10 w-32 h-32 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+    <div class="absolute bottom-10 right-10 w-32 h-32 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+  </div>
+
+  <!-- CÔTÉ DROIT : LE FORMULAIRE -->
+  <div class="flex-1 bg-white flex flex-col justify-center items-center p-8 md:p-12 border-l border-slate-100 shadow-inner">
+    
+    <!-- Logo EduFirst -->
+    <div class="flex items-center gap-3 mb-12">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-purple to-brand-blue flex items-center justify-center shadow-lg shadow-purple-200">
+            <i data-lucide="graduation-cap" class="text-white w-7 h-7"></i>
+        </div>
+        <a class="text-3xl font-bold text-slate-900">Edu<span class="text-brand-purple">First</span></a>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="w-full max-w-sm">
+        <h3 class="text-2xl font-bold mb-2 text-slate-900">Se connecter</h3>
+        <p class="text-slate-500 mb-8">Heureux de vous revoir sur la plateforme.</p>
+        
+        <div class="space-y-4">
+            <div class="form-control">
+                <input type="text" placeholder="Email ou numéro" class="input input-bordered w-full rounded-xl bg-slate-50 border-slate-200 focus:border-brand-blue h-14" />
+            </div>
+            
+            <div class="form-control">
+                <input type="password" placeholder="Mot de passe" class="input input-bordered w-full rounded-xl bg-slate-50 border-slate-200 focus:border-brand-blue h-14" />
+            </div>
+        </div>
+
+        <button class="btn bg-brand-blue hover:bg-blue-700 border-none text-white w-full rounded-xl h-14 text-lg font-bold mt-8 transition-all active:scale-95 shadow-lg shadow-blue-100">
+            Se connecter
+        </button>
+        
+        <div class="divider my-8 text-slate-400 text-sm">OU</div>
+        
+        <button class="btn btn-outline w-full rounded-xl h-14 border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+            Créer un nouveau compte
+        </button>
+
+        <p class="text-center text-sm text-slate-500 mt-6">
+            <a class="hover:text-brand-blue cursor-pointer transition-colors">Mot de passe oublié ?</a>
+        </p>
+    </div>
+
+    <!-- Footer discret -->
+    <div class="mt-auto pt-8 flex gap-4 text-xs text-slate-400">
+        <span>© 2026 EduFirst</span>
+        <span>•</span>
+        <span class="cursor-pointer hover:underline">Confidentialité</span>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // Initialisation des icônes après chargement du DOM
+  window.onload = function() {
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+  };
+</script>
+
+</body>
+</html>
