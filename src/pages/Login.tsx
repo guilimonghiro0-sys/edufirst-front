@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link, Navigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { School, User, Users, GraduationCap, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,33 +15,45 @@ const roles: { id: Role; label: string; icon: React.ElementType; description: st
   { id: "student", label: "Étudiant", icon: User, description: "Apprentissage" },
   { id: "parent", label: "Parent", icon: Users, description: "Suivi" },
 ];
+
 const Login = () => {
   const [selectedRole, setSelectedRole] = useState<Role>("admin");
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const usernamePlaceholder = selectedRole === "admin" ? "admin" : selectedRole === "teacher" ? "email@ecole.com" : selectedRole === "student" ? "matricule" : "email@parent.com";
+  const navigate = useNavigate();
+  const setAuth = useAuthStore((state) => state.setAuth);
+
+  const usernamePlaceholder =
+    selectedRole === "admin"
+      ? "admin"
+      : selectedRole === "teacher"
+      ? "email@ecole.com"
+      : selectedRole === "student"
+      ? "matricule"
+      : "email@parent.com";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await apiClient.post('/auth/login/', {
-        username: username,   // ← corrigé
+      const response = await apiClient.post("/auth/login/", {
+        username: username,
         password: password,
-        role: selectedRole,
       });
       console.log("Response data:", response.data);
       const { access, refresh, user } = response.data;
       setAuth(user, access, refresh);
       console.log("Utilisateur connecté :", user);
-      console.log("Redirection vers :", `/${user.role}/dashboard`);
+      console.log("Rôle reçu :", user?.role);
       toast.success("Connexion réussie");
-      navigate(`/dashboard/${user.role}`);
-      
+
       // Redirection selon le rôle réel
       switch (user.role) {
+        case "superadmin":
+          navigate("/superadmin/dashboard");
+          break;
         case "admin":
           navigate("/admin/dashboard");
           break;
@@ -55,10 +67,12 @@ const Login = () => {
           navigate("/student/dashboard");
           break;
         default:
-          console.error("Rôle reçu :", user.role);
-          navigate("/login");
+          console.warn("Rôle inconnu, redirection vers /dashboard");
+          navigate("/dashboard");
+          break;
       }
     } catch (error: any) {
+      console.error("Erreur détaillée :", error);
       const message = error.response?.data?.detail || "Email ou mot de passe incorrect";
       toast.error(message);
     } finally {
@@ -68,7 +82,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left - Branding (inchangé) */}
+      {/* Left - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden items-center justify-center p-12">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-64 h-64 rounded-full bg-primary-foreground/20 blur-3xl" />
@@ -122,10 +136,11 @@ const Login = () => {
                   key={role.id}
                   type="button"
                   onClick={() => setSelectedRole(role.id)}
-                  className={`flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all duration-200 ${isActive
-                    ? "bg-primary/10 ring-2 ring-primary"
-                    : "bg-card shadow-surface hover:shadow-md"
-                    }`}
+                  className={`flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all duration-200 ${
+                    isActive
+                      ? "bg-primary/10 ring-2 ring-primary"
+                      : "bg-card shadow-surface hover:shadow-md"
+                  }`}
                 >
                   <role.icon className={`w-5 h-5 ${isActive ? "text-primary" : "text-muted"}`} />
                   <span className={`text-xs font-medium ${isActive ? "text-primary" : "text-foreground"}`}>
