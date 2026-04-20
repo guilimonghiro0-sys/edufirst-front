@@ -99,7 +99,6 @@ const App = () => (
           <Route path="/dashboard/parent/profile" element={<ProfilePage role="parent" />} />
           <Route path="/dashboard/parent/settings" element={<SettingsPage role="parent" />} />
           <Route path="/dashboard/parent/notifications" element={<NotificationsPage role="parent" />} />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

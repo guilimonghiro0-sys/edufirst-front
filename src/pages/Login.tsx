@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { School, User, Users, GraduationCap, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,8 +21,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const setAuth = useAuthStore((state) => state.setAuth);
+  const usernamePlaceholder = selectedRole === "admin" ? "admin" : selectedRole === "teacher" ? "email@ecole.com" : selectedRole === "student" ? "matricule" : "email@parent.com";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,13 +30,16 @@ const Login = () => {
       const response = await apiClient.post('/auth/login/', {
         username: username,   // ← corrigé
         password: password,
-      });;
+        role: selectedRole,
+      });
       console.log("Response data:", response.data);
       const { access, refresh, user } = response.data;
       setAuth(user, access, refresh);
       console.log("Utilisateur connecté :", user);
       console.log("Redirection vers :", `/${user.role}/dashboard`);
       toast.success("Connexion réussie");
+      navigate(`/dashboard/${user.role}`);
+      
       // Redirection selon le rôle réel
       switch (user.role) {
         case "admin":
@@ -141,7 +143,7 @@ const Login = () => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="admin"
+                placeholder={usernamePlaceholder}
                 className="w-full h-11 px-4 rounded-lg bg-card shadow-surface text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
                 required
               />

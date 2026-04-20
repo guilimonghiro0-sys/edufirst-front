@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { GraduationCap, User, Mail, Lock, Calendar, MapPin, Phone, Home, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { GraduationCap, User, Mail, Lock, Calendar, MapPin, Phone, Home, Eye, EyeOff, ArrowLeft, BookOpen, TrendingUp, Star, CheckCircle2, ChevronRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -68,6 +68,31 @@ const provinces = [
   "Lomami", "Lualaba", "Maniema", "Mongala", "Montée du Nile",
   "Nord-Kivu", "Sankuru", "Sud-Kivu", "Tanganyika", "Tshopo", "Tshuapa"
 ];
+
+// Composant pour les éléments flottants (Badges scolaires)
+const FloatingBadge = ({ children, delay, x, y, icon: Icon }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ 
+      opacity: 1, 
+      scale: 1,
+      y: [0, -15, 0],
+    }}
+    transition={{ 
+      delay, 
+      duration: 4, 
+      repeat: Infinity, 
+      ease: "easeInOut" 
+    }}
+    style={{ left: x, top: y }}
+    className="absolute z-20 hidden lg:flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 p-3 rounded-2xl shadow-2xl"
+  >
+    <div className="bg-primary-foreground/20 p-1.5 rounded-lg">
+      <Icon className="w-4 h-4 text-white" />
+    </div>
+    <span className="text-white text-sm font-medium">{children}</span>
+  </motion.div>
+);
 
 const RegisterInscription = () => {
   const navigate = useNavigate();
@@ -150,31 +175,93 @@ const RegisterInscription = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-center gap-3 mb-4"
-          >
-            <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
-              <GraduationCap className="w-7 h-7 text-primary-foreground" />
-            </div>
-            <span className="text-2xl font-bold text-gray-900">EduFirst</span>
-          </motion.div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Inscription Élève</h1>
-          <p className="text-gray-600">Remplissez le formulaire pour soumettre votre demande d'inscription</p>
+    <div className="min-h-screen flex bg-slate-50 font-sans">
+      
+      {/* LEFT - BRANDING & SCHOLAR STUFF */}
+      <div className="hidden lg:flex lg:w-1/2 bg-[#3b82f6] relative overflow-hidden items-center justify-center p-12">
+        
+        {/* Cercles de fond stylisés */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-white/10 blur-[100px]" />
+          <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-blue-400/20 blur-[120px]" />
+          
+          {/* Petites icônes de fond éparpillées */}
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.1, 0.3, 0.1] }}
+              transition={{ duration: 5 + i, repeat: Infinity }}
+              className="absolute text-white/10"
+              style={{ 
+                top: `${Math.random() * 100}%`, 
+                left: `${Math.random() * 100}%` 
+              }}
+            >
+              <BookOpen size={40 + i * 10} />
+            </motion.div>
+          ))}
         </div>
 
-        <motion.form
+        {/* Badges Scolaires Flottants */}
+        <FloatingBadge x="15%" y="20%" delay={0.5} icon={Star}>Moyenne : 17.5</FloatingBadge>
+        <FloatingBadge x="70%" y="15%" delay={1.2} icon={Calendar}>Planning à jour</FloatingBadge>
+        <FloatingBadge x="65%" y="75%" delay={0.8} icon={CheckCircle2}>Examens validés</FloatingBadge>
+        <FloatingBadge x="10%" y="80%" delay={2} icon={Users}>2.5k Étudiants</FloatingBadge>
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          onSubmit={handleSubmit}
-          className="bg-white rounded-lg shadow-lg p-8 space-y-8"
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          className="relative z-10 max-w-lg"
         >
+          {/* Logo Section */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-xl">
+              <GraduationCap className="w-7 h-7 text-white" />
+            </div>
+            <span className="text-3xl font-extrabold text-white tracking-tight">EduFirst</span>
+          </div>
+
+          {/* Titre et Description */}
+          <h1 className="text-5xl font-bold text-white leading-[1.1] mb-6">
+            Le système d'exploitation de l'éducation <span className="text-blue-200 underline decoration-blue-300 underline-offset-8">moderne</span>.
+          </h1>
+          
+          <p className="text-blue-100 text-xl leading-relaxed mb-10 opacity-90">
+            Une plateforme décentralisée pour les notes, les finances et la croissance de votre institution. 
+            Gérez tout, du cursus scolaire à la diplomation.
+          </p>
+
+          {/* Mini-statistiques scolaires */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
+              <div className="text-white/60 text-sm mb-1 uppercase tracking-wider font-semibold">Taux de succès</div>
+              <div className="text-white text-2xl font-bold">98.2%</div>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
+              <div className="text-white/60 text-sm mb-1 uppercase tracking-wider font-semibold">Institutions</div>
+              <div className="text-white text-2xl font-bold">+1,200</div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* RIGHT - FORM */}
+      <div className="flex-1 flex flex-col justify-center items-center p-8 bg-white">
+        <div className="w-full max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 text-center lg:text-left">
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">Inscription Élève</h2>
+            <p className="text-slate-500">Remplissez le formulaire pour soumettre votre demande d'inscription</p>
+          </div>
+
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            onSubmit={handleSubmit}
+            className="space-y-8"
+          >
           {/* Navigation */}
           <div className="flex items-center gap-4 mb-6">
             <Button
@@ -635,7 +722,8 @@ const RegisterInscription = () => {
               Soumettre la demande d'inscription
             </Button>
           </div>
-        </motion.form>
+          </motion.form>
+        </div>
       </div>
     </div>
   );
