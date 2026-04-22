@@ -24,7 +24,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
-
+  
   const usernamePlaceholder =
     selectedRole === "admin"
       ? "admin"
@@ -52,19 +52,19 @@ const Login = () => {
       // Redirection selon le rôle réel
       switch (user.role) {
         case "superadmin":
-          navigate("/superadmin/dashboard");
+          navigate("/dashboard/superadmin");
           break;
         case "admin":
-          navigate("/admin/dashboard");
+          navigate("/dashboard/admin");
           break;
         case "teacher":
-          navigate("/teacher/dashboard");
+          navigate("/dashboard/teacher");
           break;
         case "parent":
-          navigate("/parent/dashboard");
+          navigate("/dashboard/parent");
           break;
         case "student":
-          navigate("/student/dashboard");
+          navigate("/dashboard/student");
           break;
         default:
           console.warn("Rôle inconnu, redirection vers /dashboard");
@@ -83,7 +83,7 @@ const Login = () => {
   return (
     <div className="min-h-screen flex relative">
       {/* Image de fond avec overlay */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/bg-login.jpg')" }}
       />
