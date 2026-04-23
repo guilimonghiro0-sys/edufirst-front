@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { School, User, Users, GraduationCap, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,8 +23,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const setAuth = useAuthStore((state) => state.setAuth);
-  
+
+  // Récupérer le paramètre checkEmail dans l'URL
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const checkEmail = params.get('checkEmail');
+    if (checkEmail) {
+      toast.info("Veuillez vérifier vos emails et confirmer votre compte avant de vous connecter.");
+    }
+  }, [location.search]);
+
   const usernamePlaceholder =
     selectedRole === "admin"
       ? "admin"
@@ -87,9 +97,9 @@ const Login = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/bg-login.jpg')" }}
       />
-      <div className="absolute inset-0 bg-black/50" /> {/* overlay sombre pour lisibilité */}
+      <div className="absolute inset-0 bg-black/50" />
 
-      {/* Contenu principal (z-index pour passer au‑dessus) */}
+      {/* Contenu principal */}
       <div className="relative z-10 flex w-full">
         {/* Left - Branding */}
         <div className="hidden lg:flex lg:w-1/2 bg-primary/80 backdrop-blur-sm relative overflow-hidden items-center justify-center p-12">
@@ -136,7 +146,7 @@ const Login = () => {
             <h2 className="text-2xl font-bold text-foreground mb-1">Connexion</h2>
             <p className="text-muted mb-8">Accédez à votre espace de gestion scolaire.</p>
 
-            {/* Role Selector (purement visuel, n'affecte pas l'authentification) */}
+            {/* Role Selector */}
             <div className="grid grid-cols-4 gap-2 mb-8">
               {roles.map((role) => {
                 const isActive = selectedRole === role.id;

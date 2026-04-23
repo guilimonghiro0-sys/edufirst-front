@@ -52,6 +52,21 @@ const RegisterStudent = () => {
     birthPlace: '',
     province: '',
     address: '',
+    motherFirstName: '',
+    motherLastName: '',
+    motherMaidenName: '',
+    motherHasAuthority: false,
+    motherPhone: '',
+    motherEmail: '',
+    fatherFirstName: '',
+    fatherLastName: '',
+    fatherHasAuthority: false,
+    fatherPhone: '',
+    fatherEmail: '',
+    otherGuardianName: '',
+    otherGuardianRelation: '',
+    otherGuardianPhone: '',
+    otherGuardianEmail: '',
     email: '',
     phone: '',
     password: '',
@@ -90,6 +105,7 @@ const RegisterStudent = () => {
       }
     }
   };
+  
 
   return (
     <DashboardLayout role="student">
