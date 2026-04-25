@@ -35,6 +35,9 @@ import RegisterInscription from "./pages/RegisterInscription";
 import NotFound from "./pages/NotFound";
 import RegistrationsPage from "./pages/admin/RegistrationsPage";
 import Finances from "./pages/admin/Finances";
+import ConfirmAccountPage from './pages/ConfirmAccountPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import ResetPasswordConfirmPage from './pages/ResetPasswordConfirmPage';
 
 const queryClient = new QueryClient();
 
@@ -63,6 +66,9 @@ const App = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/register/inscription" element={<RegisterInscription />} />
                 <Route path="/onboarding" element={<Onboarding />} />
+                <Route path="/confirm-account/:token" element={<ConfirmAccountPage />} />
+                <Route path="/reset-password" element={<ResetPasswordPage />} />
+                <Route path="/reset-password/confirm/:token" element={<ResetPasswordConfirmPage />} />
 
                 {/* Admin */}
                 <Route path="/dashboard/admin" element={<AdminDashboard />} />

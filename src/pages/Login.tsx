@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import apiClient from "@/api/client";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
+import bgImage from "@/assets/render-1 (2).jpg";
 
 type Role = "admin" | "teacher" | "student" | "parent";
 
@@ -30,7 +31,7 @@ const Login = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const checkEmail = params.get('checkEmail');
-    if (checkEmail) {
+    if  (params.get('checkEmail')) {
       toast.info("Veuillez vérifier vos emails et confirmer votre compte avant de vous connecter.");
     }
   }, [location.search]);
@@ -95,7 +96,7 @@ const Login = () => {
       {/* Image de fond avec overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/bg-login.jpg')" }}
+        style={{ backgroundImage: "url('/assets/rensrc/assets/render-1 (2).jpg')" }}
       />
       <div className="absolute inset-0 bg-black/50" />
 
@@ -216,6 +217,12 @@ const Login = () => {
                 Créer un compte →
               </Link>
             </div>
+            <div className="mt-1 text-center">
+              <Link 
+                to="/reset-password" className="text-sm text-primary hover:underline">
+                Mot de passe oublié ?
+  </Link>
+</div>
           </motion.div>
         </div>
       </div>

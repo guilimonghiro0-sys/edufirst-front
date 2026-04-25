@@ -8,6 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import bgImage from "@/assets/render-1 (2).jpg";
 
 type RegisterRole = "admin" | "teacher" | "parent";
 
@@ -136,10 +137,10 @@ const Register = () => {
                 <p className="text-sm text-muted-foreground">
                   L'inscription d'un établissement se fait via notre assistant d'onboarding en 4 étapes.
                 </p>
-                <Button onClick={() => navigate("/onboarding")} className="w-full" variant="hero" size="lg">
-                  Démarrer l'onboarding
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
+                <Button onClick={() => navigate("/onboarding/school")} className="w-full" variant="hero" size="lg">
+  Démarrer l'onboarding
+  <ArrowRight className="w-4 h-4" />
+</Button>
               </motion.div>
             ) : (
               <motion.form

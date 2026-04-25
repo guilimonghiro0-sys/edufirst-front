@@ -20,11 +20,27 @@ import GradesEntryPage from './pages/teacher/GradesEntryPage';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import ChildrenPage from './pages/parent/ChildrenPage';
 import WalletPage from './pages/parent/WalletPage';
-import Finances from './pages/admin/dashboards/Finances';
+import Finances from './pages/admin/Finances';
 import AdminDashboard from './pages/admin/dashboards/AdminDashboard';
 import AdminDashboardPage from './pages/admin/dashboards/AdminDashboardPage';
+import ConfirmAccountPage from './pages/ConfirmAccountPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import ResetPasswordConfirmPage from './pages/ResetPasswordConfirmPage';
 
 export const router = createBrowserRouter([
+
+    {
+        path: "/page/confirm-account/:token",
+        element: <ConfirmAccountPage />
+    },
+    {
+        path: "/page/reset-password",
+        element: <ResetPasswordPage />
+    },
+    {
+        path: "/page/reset-password/confirm/:token",
+        element: <ResetPasswordConfirmPage />
+    },
 
     {
         path: '/admin/finances',
@@ -84,6 +100,16 @@ export const router = createBrowserRouter([
             { index: true, element: <Navigate to="dashboard" replace /> },
             { path: 'dashboard', element: <TeacherDashboard /> },
             { path: 'grades', element: <GradesEntryPage /> },
+            { path: 'students', element: <StudentsPage /> },
+            {path: 'students/:studentId', element: <StudentDetails /> },
+            { path: 'overview', element: <OverviewPage /> },
+            { path: 'discipline', element: <DisciplinePage /> },
+            { path: 'settings', element: <div>Paramètres du professeur</div> },
+            { path: 'library', element: <div>Bibliothèque du professeur</div> },
+            { path : 'calendar', element: <div>Calendrier du professeur</div> },
+            { path : 'chat', element: <div>Chat du professeur</div> },
+            { path : 'classes', element: <div>Gestion des classes du professeur</div> },
+
             // autres routes teacher...
         ],
     },

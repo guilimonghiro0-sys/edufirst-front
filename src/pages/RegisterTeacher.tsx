@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import apiClient from '@/api/client';
 import DashboardLayout from "@/components/DashboardLayout";
@@ -10,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { User, Mail, Lock, Phone, MapPin, GraduationCap, Calendar, Map } from 'lucide-react';
+import { User, Mail, Lock, Phone, GraduationCap } from 'lucide-react';
 
 const teacherSchema = z.object({
   firstName: z.string().min(2, 'Prénom requis'),
@@ -47,12 +46,12 @@ const RegisterTeacher = () => {
 
   const onSubmit = async (data: TeacherForm) => {
     try {
-      await apiClient.post('/register/teacher/', data);
-      toast.success('Inscription réussie ! Un email de confirmation vous a été envoyé.');
+      const response = await apiClient.post('/register/teacher/', data);
+      toast.success(response.data.message || "Inscription réussie ! Vérifiez vos emails.");
       navigate('/login?checkEmail=true');
-    } catch (err: any) {
-      const errorMsg = err.response?.data?.email?.[0] || err.response?.data?.detail || 'Erreur lors de l’inscription';
-      toast.error(errorMsg);
+    } catch (error: any) {
+      const message = error.response?.data?.detail || "Erreur lors de l'inscription";
+      toast.error(message);
     }
   };
 

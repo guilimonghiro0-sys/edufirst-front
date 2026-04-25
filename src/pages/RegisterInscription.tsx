@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
+import apiClient from '@/api/client';
+import { toast } from 'sonner';  // si ce n'est pas déjà importé
 
 const studentSchema = z.object({
   // Élève
@@ -146,33 +148,59 @@ const RegisterInscription = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    try {
-      const validatedData = studentSchema.parse(formData);
+  try {
+    const validatedData = studentSchema.parse(formData);
 
-      // TODO: Call API to submit registration
-      console.log('Submitting student registration:', validatedData);
+    // Adaptation des champs pour le backend
+    const payload = {
+      firstName: validatedData.firstName,
+      lastName: validatedData.lastName,
+      gender: validatedData.gender,
+      birthDate: validatedData.birthDate,
+      birthPlace: validatedData.birthPlace,
+      province: validatedData.province,
+      address: validatedData.address,
+      motherFirstName: validatedData.motherFirstName,
+      motherLastName: validatedData.motherLastName,
+      motherMaidenName: validatedData.motherMaidenName,
+      motherHasAuthority: validatedData.motherHasAuthority,
+      motherPhone: validatedData.motherPhoneMobile || validatedData.motherPhoneHome || '',
+      motherEmail: validatedData.motherEmail,
+      fatherFirstName: validatedData.fatherFirstName,
+      fatherLastName: validatedData.fatherLastName,
+      fatherHasAuthority: validatedData.fatherHasAuthority,
+      fatherPhone: validatedData.fatherPhoneMobile || validatedData.fatherPhoneHome || '',
+      fatherEmail: validatedData.fatherEmail,
+      otherGuardianName: validatedData.otherGuardianName,
+      otherGuardianRelation: validatedData.otherGuardianRelation,
+      otherGuardianPhone: validatedData.otherGuardianPhone,
+      otherGuardianEmail: validatedData.otherGuardianEmail,
+      email: validatedData.email,
+      password: validatedData.password,
+      confirmPassword: validatedData.confirmPassword,
+    };
 
-      toast({
-        title: "Demande d'inscription envoyée",
-        description: "Votre demande sera examinée par l'établissement. Vous recevrez un email de confirmation.",
+    const response = await apiClient.post('/register/student/', payload);
+    toast.success(response.data.message || "Demande d'inscription envoyée ! Vérifiez vos emails.");
+    navigate('/login?checkEmail=true');
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      const fieldErrors: Partial<Record<keyof StudentFormData, string>> = {};
+      error.errors.forEach((err) => {
+        if (err.path[0]) {
+          fieldErrors[err.path[0] as keyof StudentFormData] = err.message;
+        }
       });
-
-      navigate('/login');
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const fieldErrors: Partial<Record<keyof StudentFormData, string>> = {};
-        error.errors.forEach((err) => {
-          if (err.path[0]) {
-            fieldErrors[err.path[0] as keyof StudentFormData] = err.message;
-          }
-        });
-        setErrors(fieldErrors);
-      }
+      setErrors(fieldErrors);
+    } else {
+      console.error(error);
+      toast.error("Erreur lors de l'envoi de la demande");
     }
-  };
+  }
+};
 
   return (
     <div className="min-h-screen flex bg-slate-50 font-sans">
