@@ -1,0 +1,19 @@
+{
+  "connexion": "Iniciar sesión",
+  "identifiant": "Usuario",
+  "mot_de_passe": "Contraseña",
+  "lancer_tableau": "Abrir panel",
+  "creer_compte": "Crear cuenta →",
+  "mot_passe_oublie": "¿Olvidó su contraseña?"
+  ,
+  "connexion_reussie": "Conexión exitosa",
+  "email_ou_mdp_incorrect": "Correo o contraseña incorrectos",
+  "connexion_en_cours": "Conectando...",
+  "role_admin": "Institución",
+  "role_teacher": "Profesor",
+  "role_student": "Estudiante",
+  "role_parent": "Padre",
+  "slogan": "El sistema operativo de la educación moderna.",
+  "description": "Una plataforma descentralizada para calificaciones, finanzas y el crecimiento de su institución.",
+  "accedez_espace": "Acceda a su espacio de gestión escolar."
+}

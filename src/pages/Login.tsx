@@ -7,17 +7,66 @@ import apiClient from "@/api/client";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
 import bgImage from "@/assets/render-1 (2).jpg";
+import { useTranslation } from "react-i18next";
 
 type Role = "admin" | "teacher" | "student" | "parent";
 
-const roles: { id: Role; label: string; icon: React.ElementType; description: string }[] = [
-  { id: "admin", label: "Établissement", icon: School, description: "Administration" },
-  { id: "teacher", label: "Professeur", icon: GraduationCap, description: "Enseignement" },
-  { id: "student", label: "Étudiant", icon: User, description: "Apprentissage" },
+const roles: {
+  id: Role;
+  label: string;
+  icon: React.ElementType;
+  description: string;
+}[] = [
+  {
+    id: "admin",
+    label: "Établissement",
+    icon: School,
+    description: "Administration",
+  },
+  {
+    id: "teacher",
+    label: "Professeur",
+    icon: GraduationCap,
+    description: "Enseignement",
+  },
+  {
+    id: "student",
+    label: "Étudiant",
+    icon: User,
+    description: "Apprentissage",
+  },
   { id: "parent", label: "Parent", icon: Users, description: "Suivi" },
 ];
 
+// Composant sélecteur de langue intégré
+const LanguageSwitcher = () => {
+  const { i18n } = useTranslation();
+  return (
+    <div className="fixed top-4 right-4 z-50 flex gap-2 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md">
+      <button
+        onClick={() => i18n.changeLanguage("fr")}
+        className="px-2 py-1 text-sm font-medium hover:opacity-80"
+      >
+        🇫🇷 FR
+      </button>
+      <button
+        onClick={() => i18n.changeLanguage("en")}
+        className="px-2 py-1 text-sm font-medium hover:opacity-80"
+      >
+        🇬🇧 EN
+      </button>
+      <button
+        onClick={() => i18n.changeLanguage("es")}
+        className="px-2 py-1 text-sm font-medium hover:opacity-80"
+      >
+        🇪🇸 ES
+      </button>
+    </div>
+  );
+};
+
 const Login = () => {
+  const { t } = useTranslation();
   const [selectedRole, setSelectedRole] = useState<Role>("admin");
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
@@ -27,12 +76,12 @@ const Login = () => {
   const location = useLocation();
   const setAuth = useAuthStore((state) => state.setAuth);
 
-  // Récupérer le paramètre checkEmail dans l'URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const checkEmail = params.get('checkEmail');
-    if  (params.get('checkEmail')) {
-      toast.info("Veuillez vérifier vos emails et confirmer votre compte avant de vous connecter.");
+    if (params.get("checkEmail")) {
+      toast.info(
+        "Veuillez vérifier vos emails et confirmer votre compte avant de vous connecter.",
+      );
     }
   }, [location.search]);
 
@@ -40,10 +89,10 @@ const Login = () => {
     selectedRole === "admin"
       ? "admin"
       : selectedRole === "teacher"
-      ? "email@ecole.com"
-      : selectedRole === "student"
-      ? "matricule"
-      : "email@parent.com";
+        ? "email@ecole.com"
+        : selectedRole === "student"
+          ? "matricule"
+          : "email@parent.com";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,9 +107,8 @@ const Login = () => {
       setAuth(user, access, refresh);
       console.log("Utilisateur connecté :", user);
       console.log("Rôle reçu :", user?.role);
-      toast.success("Connexion réussie");
+      toast.success(t("connexion_reussie") || "Connexion réussie");
 
-      // Redirection selon le rôle réel
       switch (user.role) {
         case "superadmin":
           navigate("/dashboard/superadmin");
@@ -84,7 +132,10 @@ const Login = () => {
       }
     } catch (error: any) {
       console.error("Erreur détaillée :", error);
-      const message = error.response?.data?.detail || "Email ou mot de passe incorrect";
+      const message =
+        error.response?.data?.detail ||
+        t("email_ou_mdp_incorrect") ||
+        "Email ou mot de passe incorrect";
       toast.error(message);
     } finally {
       setIsLoading(false);
@@ -93,12 +144,10 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex relative">
-      {/* Image de fond avec overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/assets/rensrc/assets/render-1 (2).jpg')" }}
-      />
-      <div className="absolute inset-0 bg-black/50" />
+      {/* Image de fond */}
+
+      {/* Sélecteur de langue */}
+      <LanguageSwitcher />
 
       {/* Contenu principal */}
       <div className="relative z-10 flex w-full">
@@ -118,14 +167,19 @@ const Login = () => {
               <div className="w-10 h-10 rounded-xl bg-primary-foreground/20 flex items-center justify-center">
                 <GraduationCap className="w-6 h-6 text-primary-foreground" />
               </div>
-              <span className="text-2xl font-bold text-primary-foreground">EduFirst</span>
+              <span className="text-2xl font-bold text-primary-foreground">
+                EduFirst
+              </span>
             </div>
             <h1 className="text-4xl font-bold text-primary-foreground leading-tight mb-4">
-              Le système d'exploitation de l'éducation moderne.
+              {t("slogan") ||
+                "Le système d'exploitation de l'éducation moderne."}
             </h1>
             <p className="text-primary-foreground/70 text-lg">
-              Une plateforme décentralisée pour les notes, les finances et la croissance de votre institution.
+              {t("description") ||
+                "Une plateforme décentralisée pour les notes, les finances et la croissance de votre institution."}
             </p>
+             <img src="{bgImage}" alt="" />
           </motion.div>
         </div>
 
@@ -141,13 +195,19 @@ const Login = () => {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <GraduationCap className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-foreground">EduFirst</span>
+              <span className="text-xl font-bold text-foreground">
+                EduFirst
+              </span>
             </div>
 
-            <h2 className="text-2xl font-bold text-foreground mb-1">Connexion</h2>
-            <p className="text-muted mb-8">Accédez à votre espace de gestion scolaire.</p>
+            <h2 className="text-2xl font-bold text-foreground mb-1">
+              {t("connexion")}
+            </h2>
+            <p className="text-muted mb-8">
+              {t("accedez_espace") ||
+                "Accédez à votre espace de gestion scolaire."}
+            </p>
 
-            {/* Role Selector */}
             <div className="grid grid-cols-4 gap-2 mb-8">
               {roles.map((role) => {
                 const isActive = selectedRole === role.id;
@@ -162,9 +222,13 @@ const Login = () => {
                         : "bg-card shadow-surface hover:shadow-md"
                     }`}
                   >
-                    <role.icon className={`w-5 h-5 ${isActive ? "text-primary" : "text-muted"}`} />
-                    <span className={`text-xs font-medium ${isActive ? "text-primary" : "text-foreground"}`}>
-                      {role.label}
+                    <role.icon
+                      className={`w-5 h-5 ${isActive ? "text-primary" : "text-muted"}`}
+                    />
+                    <span
+                      className={`text-xs font-medium ${isActive ? "text-primary" : "text-foreground"}`}
+                    >
+                      {t(`role_${role.id}`) || role.label}
                     </span>
                   </button>
                 );
@@ -173,7 +237,9 @@ const Login = () => {
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5">Identifiant</label>
+                <label className="block text-sm font-medium text-foreground mb-1.5">
+                  {t("identifiant")}
+                </label>
                 <input
                   type="text"
                   value={username}
@@ -184,7 +250,9 @@ const Login = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5">Mot de passe</label>
+                <label className="block text-sm font-medium text-foreground mb-1.5">
+                  {t("mot_de_passe")}
+                </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -199,13 +267,23 @@ const Login = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors"
                   >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    {showPassword ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+                    )}
                   </button>
                 </div>
               </div>
 
-              <Button type="submit" variant="hero" className="w-full" size="lg" disabled={isLoading}>
-                {isLoading ? "Connexion en cours..." : "Lancer le tableau de bord"}
+              <Button
+                type="submit"
+                variant="hero"
+                className="w-full"
+                size="lg"
+                disabled={isLoading}
+              >
+                {isLoading ? t("connexion_en_cours") : t("lancer_tableau")}
               </Button>
             </form>
 
@@ -214,15 +292,17 @@ const Login = () => {
                 to="/register"
                 className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
               >
-                Créer un compte →
+                {t("creer_compte")}
               </Link>
             </div>
             <div className="mt-1 text-center">
-              <Link 
-                to="/reset-password" className="text-sm text-primary hover:underline">
-                Mot de passe oublié ?
-  </Link>
-</div>
+              <Link
+                to="/reset-password"
+                className="text-sm text-primary hover:underline"
+              >
+                {t("mot_passe_oublie")}
+              </Link>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -6,8 +6,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Preloader from "./components/Preloader";
+import LanguageSwitcher from "./components/LanguageSwitcher"; // ← import du sélecteur
 
-// Pages (un seul import par composant)
+// Pages (imports conservés)
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -66,7 +67,10 @@ const App = () => {
             <Preloader key="preloader" />
           ) : (
             <BrowserRouter key="app">
+              {/* Sélecteur de langue global (visible sur toutes les pages) */}
+              <LanguageSwitcher />
               <Routes>
+                {/* Toutes tes routes existantes, inchangées */}
                 <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />

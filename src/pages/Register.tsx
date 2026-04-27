@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import bgImage from "@/assets/render-1 (2).jpg";
+import { useTranslation } from 'react-i18next';
 
 type RegisterRole = "admin" | "teacher" | "parent";
 
@@ -24,6 +25,17 @@ const roles = [
   { id: "teacher" as const, label: "Professeur", icon: BookOpen, description: "Enseignant" },
   { id: "parent" as const, label: "Parent", icon: Heart, description: "Parent d'élève" },
 ];
+// Composant sélecteur de langue intégré
+const LanguageSwitcher = () => {
+  const { i18n } = useTranslation();
+  return (
+    <div className="fixed top-4 right-4 z-50 flex gap-2 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md">
+      <button onClick={() => i18n.changeLanguage('fr')} className="px-2 py-1 text-sm font-medium hover:opacity-80">🇫🇷 FR</button>
+      <button onClick={() => i18n.changeLanguage('en')} className="px-2 py-1 text-sm font-medium hover:opacity-80">🇬🇧 EN</button>
+      <button onClick={() => i18n.changeLanguage('es')} className="px-2 py-1 text-sm font-medium hover:opacity-80">🇪🇸 ES</button>
+    </div>
+  );
+};
 
 const Register = () => {
   const navigate = useNavigate();
