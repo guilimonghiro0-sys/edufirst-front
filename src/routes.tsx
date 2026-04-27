@@ -26,8 +26,30 @@ import AdminDashboardPage from './pages/admin/dashboards/AdminDashboardPage';
 import ConfirmAccountPage from './pages/ConfirmAccountPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ResetPasswordConfirmPage from './pages/ResetPasswordConfirmPage';
+import StudentDashboard from './pages/student/StudentDashboard';
+import StudentDashboardV2 from './pages/student/StudentDashboardV2';
+import EduStore from './pages/store/EduStore';
+import CheckoutPage from './pages/store/CheckoutPage';
 
+// Dans le bloc des routes (par exemple après les routes parent)
 export const router = createBrowserRouter([
+
+{
+    path:"/dashboard/student", 
+    element:<StudentDashboard />
+},
+{
+    path:"/dashboard/student/v2", 
+    element:<StudentDashboardV2 />
+},
+{
+    path:"/store", 
+    element:<EduStore />
+},
+{
+    path:"/checkout", 
+    element:<CheckoutPage />
+},
 
     {
         path: "/page/confirm-account/:token",
