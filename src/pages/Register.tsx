@@ -149,7 +149,7 @@ const Register = () => {
                 <p className="text-sm text-muted-foreground">
                   L'inscription d'un établissement se fait via notre assistant d'onboarding en 4 étapes.
                 </p>
-                <Button onClick={() => navigate("/onboarding/school")} className="w-full" variant="hero" size="lg">
+                <Button onClick={() => navigate("/onboarding")} className="w-full" variant="hero" size="lg">
   Démarrer l'onboarding
   <ArrowRight className="w-4 h-4" />
 </Button>
