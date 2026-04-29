@@ -614,7 +614,7 @@ const Onboarding = () => {
                   <Input
                     id="adminName"
                     {...register4("adminName")}
-                    placeholder="Jean Dupont"
+                    placeholder="Jean Mbala"
                   />
                   {errors4.adminName && (
                     <p className="text-red-500 text-sm">
@@ -650,7 +650,7 @@ const Onboarding = () => {
                     id="password"
                     type="password"
                     {...register4("password")}
-                    placeholder="6 caractères minimum"
+                    placeholder="8 caractères minimum"
                   />
                   {errors4.password && (
                     <p className="text-red-500 text-sm">
