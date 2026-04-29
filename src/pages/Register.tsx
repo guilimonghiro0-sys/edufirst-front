@@ -2,37 +2,98 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  GraduationCap, Building2, BookOpen, Heart,
-  Mail, Lock, User, ArrowRight, AlertCircle, Eye, EyeOff
+  GraduationCap,
+  Building2,
+  BookOpen,
+  Heart,
+  Mail,
+  Lock,
+  User,
+  ArrowRight,
+  AlertCircle,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import bgImage from "@/assets/render-1 (2).jpg";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 type RegisterRole = "admin" | "teacher" | "parent";
 
 const provinces = [
-  "Kasai", "Kasai Central", "Kasai Oriental",
-  "Kinshasa", "Kongo Central", "Kwango", "Kwilu",
-  "Lomami", "Lualaba", "Maniema", "Mongala", "Montée du Nile",
-  "Nord-Kivu", "Sankuru", "Sud-Kivu", "Tanganyika", "Tshopo", "Tshuapa"
+  "Bas-Uele",
+  "Équateur",
+  "Haut-Katanga",
+  "Haut-Lomami",
+  "Haut-Uele",
+  "Ituri",
+  "Kasaï",
+  "Kasaï-Central",
+  "Kasaï-Oriental",
+  "Kinshasa",
+  "Kongo-Central",
+  "Kwango",
+  "Kwilu",
+  "Lomami",
+  "Lualaba",
+  "Mai-Ndombe",
+  "Maniema",
+  "Mongala",
+  "Nord-Kivu",
+  "Nord-Ubangi",
+  "Sankuru",
+  "Sud-Kivu",
+  "Sud-Ubangi",
+  "Tanganyika",
+  "Tshopo",
+  "Tshuapa",
 ];
 
 const roles = [
-  { id: "admin" as const, label: "Établissement", icon: Building2, description: "Chef d'établissement" },
-  { id: "teacher" as const, label: "Professeur", icon: BookOpen, description: "Enseignant" },
-  { id: "parent" as const, label: "Parent", icon: Heart, description: "Parent d'élève" },
+  {
+    id: "admin" as const,
+    label: "Établissement",
+    icon: Building2,
+    description: "Chef d'établissement",
+  },
+  {
+    id: "teacher" as const,
+    label: "Professeur",
+    icon: BookOpen,
+    description: "Enseignant",
+  },
+  {
+    id: "parent" as const,
+    label: "Parent",
+    icon: Heart,
+    description: "Parent d'élève",
+  },
 ];
 // Composant sélecteur de langue intégré
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   return (
     <div className="fixed top-4 right-4 z-50 flex gap-2 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md">
-      <button onClick={() => i18n.changeLanguage('fr')} className="px-2 py-1 text-sm font-medium hover:opacity-80">🇫🇷 FR</button>
-      <button onClick={() => i18n.changeLanguage('en')} className="px-2 py-1 text-sm font-medium hover:opacity-80">🇬🇧 EN</button>
-      <button onClick={() => i18n.changeLanguage('es')} className="px-2 py-1 text-sm font-medium hover:opacity-80">🇪🇸 ES</button>
+      <button
+        onClick={() => i18n.changeLanguage("fr")}
+        className="px-2 py-1 text-sm font-medium hover:opacity-80"
+      >
+        🇫🇷 FR
+      </button>
+      <button
+        onClick={() => i18n.changeLanguage("en")}
+        className="px-2 py-1 text-sm font-medium hover:opacity-80"
+      >
+        🇬🇧 EN
+      </button>
+      <button
+        onClick={() => i18n.changeLanguage("es")}
+        className="px-2 py-1 text-sm font-medium hover:opacity-80"
+      >
+        🇪🇸 ES
+      </button>
     </div>
   );
 };
@@ -51,7 +112,7 @@ const Register = () => {
     inviteCode: "",
     specialty: "",
     password: "",
-    confirm: ""
+    confirm: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -63,8 +124,10 @@ const Register = () => {
     navigate(`/${selectedRole}/dashboard`);
   };
 
-  const specialtyLabel = selectedRole === "teacher" ? "Spécialité / Matière" : "Lien de parenté";
-  const specialtyPlaceholder = selectedRole === "teacher" ? "Ex: Mathématiques" : "Ex: Père, Mère, Tuteur";
+  const specialtyLabel =
+    selectedRole === "teacher" ? "Spécialité / Matière" : "Lien de parenté";
+  const specialtyPlaceholder =
+    selectedRole === "teacher" ? "Ex: Mathématiques" : "Ex: Père, Mère, Tuteur";
 
   return (
     <div className="min-h-screen flex bg-background">
@@ -81,16 +144,21 @@ const Register = () => {
             <div className="w-10 h-10 rounded-xl bg-primary-foreground/20 flex items-center justify-center">
               <GraduationCap className="w-6 h-6 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold text-primary-foreground">EduFirst</span>
+            <span className="text-xl font-bold text-primary-foreground">
+              EduFirst
+            </span>
           </div>
           <h1 className="text-4xl font-bold text-primary-foreground leading-tight mb-4">
             Rejoignez la communauté EduFirst
           </h1>
           <p className="text-primary-foreground/70 text-lg leading-relaxed">
-            Créez votre compte et accédez à une plateforme de gestion scolaire moderne et intuitive.
+            Créez votre compte et accédez à une plateforme de gestion scolaire
+            moderne et intuitive.
           </p>
         </div>
-        <p className="relative z-10 text-primary-foreground/50 text-sm">© 2025 EduFirst. Tous droits réservés.</p>
+        <p className="relative z-10 text-primary-foreground/50 text-sm">
+          © 2025 EduFirst. Tous droits réservés.
+        </p>
       </motion.div>
 
       {/* Right form */}
@@ -110,8 +178,12 @@ const Register = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold text-foreground">Créer un compte</h2>
-            <p className="text-muted-foreground mt-1">Choisissez votre profil pour commencer</p>
+            <h2 className="text-2xl font-bold text-foreground">
+              Créer un compte
+            </h2>
+            <p className="text-muted-foreground mt-1">
+              Choisissez votre profil pour commencer
+            </p>
           </div>
 
           {/* Role selector */}
@@ -120,13 +192,16 @@ const Register = () => {
               <button
                 key={role.id}
                 onClick={() => setSelectedRole(role.id)}
-                className={`p-3 rounded-xl text-center transition-all duration-200 ${selectedRole === role.id
-                  ? "bg-primary/10 ring-2 ring-primary text-primary"
-                  : "bg-secondary text-muted-foreground hover:bg-secondary/80"
-                  }`}
+                className={`p-3 rounded-xl text-center transition-all duration-200 ${
+                  selectedRole === role.id
+                    ? "bg-primary/10 ring-2 ring-primary text-primary"
+                    : "bg-secondary text-muted-foreground hover:bg-secondary/80"
+                }`}
               >
                 <role.icon className="w-5 h-5 mx-auto mb-1.5" />
-                <span className="text-xs font-semibold block">{role.label}</span>
+                <span className="text-xs font-semibold block">
+                  {role.label}
+                </span>
               </button>
             ))}
           </div>
@@ -134,7 +209,11 @@ const Register = () => {
           {/* Student notice */}
           <div className="flex items-start gap-3 p-3 rounded-xl bg-secondary text-muted-foreground text-sm">
             <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
-            <span>Les comptes <strong className="text-foreground">Élèves</strong> sont créés par l'Établissement ou le Parent depuis leur tableau de bord.</span>
+            <span>
+              Les comptes <strong className="text-foreground">Élèves</strong>{" "}
+              sont créés par l'Établissement ou le Parent depuis leur tableau de
+              bord.
+            </span>
           </div>
 
           <AnimatePresence mode="wait">
@@ -147,12 +226,18 @@ const Register = () => {
                 className="space-y-4"
               >
                 <p className="text-sm text-muted-foreground">
-                  L'inscription d'un établissement se fait via notre assistant d'onboarding en 4 étapes.
+                  L'inscription d'un établissement se fait via notre assistant
+                  d'onboarding en 4 étapes.
                 </p>
-                <Button onClick={() => navigate("/onboarding")} className="w-full" variant="hero" size="lg">
-  Démarrer l'onboarding
-  <ArrowRight className="w-4 h-4" />
-</Button>
+                <Button
+                  onClick={() => navigate("/onboarding")}
+                  className="w-full"
+                  variant="hero"
+                  size="lg"
+                >
+                  Démarrer l'onboarding
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
               </motion.div>
             ) : (
               <motion.form
@@ -167,7 +252,16 @@ const Register = () => {
                   <Label htmlFor="firstname">Prénom</Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input id="firstname" placeholder="Jean" className="pl-10" value={form.firstname} onChange={(e) => setForm({ ...form, firstname: e.target.value })} required />
+                    <Input
+                      id="firstname"
+                      placeholder="Jean"
+                      className="pl-10"
+                      value={form.firstname}
+                      onChange={(e) =>
+                        setForm({ ...form, firstname: e.target.value })
+                      }
+                      required
+                    />
                   </div>
                 </div>
 
@@ -175,13 +269,31 @@ const Register = () => {
                   <Label htmlFor="lastname">Nom</Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input id="lastname" placeholder="Kayembe" className="pl-10" value={form.lastname} onChange={(e) => setForm({ ...form, lastname: e.target.value })} required />
+                    <Input
+                      id="lastname"
+                      placeholder="Kayembe"
+                      className="pl-10"
+                      value={form.lastname}
+                      onChange={(e) =>
+                        setForm({ ...form, lastname: e.target.value })
+                      }
+                      required
+                    />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <Label htmlFor="gender">Genre *</Label>
-                  <select id="gender" title="Genre" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={form.gender} onChange={(e) => setForm({ ...form, gender: e.target.value })} required>
+                  <select
+                    id="gender"
+                    title="Genre"
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    value={form.gender}
+                    onChange={(e) =>
+                      setForm({ ...form, gender: e.target.value })
+                    }
+                    required
+                  >
                     <option value="">Choisir</option>
                     <option value="M">Masculin</option>
                     <option value="F">Féminin</option>
@@ -192,43 +304,108 @@ const Register = () => {
                   <Label htmlFor="email">Adresse email *</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input id="email" type="email" placeholder="jean@email.com" className="pl-10" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="jean@email.com"
+                      className="pl-10"
+                      value={form.email}
+                      onChange={(e) =>
+                        setForm({ ...form, email: e.target.value })
+                      }
+                      required
+                    />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <Label htmlFor="province">Province d’origine *</Label>
-                  <select id="province" title="Province d’origine" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={form.province} onChange={(e) => setForm({ ...form, province: e.target.value })} required>
+                  <select
+                    id="province"
+                    title="Province d’origine"
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    value={form.province}
+                    onChange={(e) =>
+                      setForm({ ...form, province: e.target.value })
+                    }
+                    required
+                  >
                     <option value="">Choisir une province</option>
                     {provinces.map((p) => (
-                      <option key={p} value={p}>{p}</option>
+                      <option key={p} value={p}>
+                        {p}
+                      </option>
                     ))}
                   </select>
                 </div>
 
                 <div className="space-y-1.5">
                   <Label htmlFor="phone">Téléphone</Label>
-                  <Input id="phone" placeholder="+243..." value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                  <Input
+                    id="phone"
+                    placeholder="+243..."
+                    value={form.phone}
+                    onChange={(e) =>
+                      setForm({ ...form, phone: e.target.value })
+                    }
+                  />
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="inviteCode">Code Invitation (fourni par l'école)</Label>
-                  <Input id="inviteCode" placeholder="Ex: EDU-NORD-2025" value={form.inviteCode} onChange={(e) => setForm({ ...form, inviteCode: e.target.value })} />
-                  <p className="text-[11px] text-muted-foreground">Ce code vous rattache automatiquement à l'établissement.</p>
+                  <Label htmlFor="inviteCode">
+                    Code Invitation (fourni par l'école)
+                  </Label>
+                  <Input
+                    id="inviteCode"
+                    placeholder="Ex: EDU-NORD-2025"
+                    value={form.inviteCode}
+                    onChange={(e) =>
+                      setForm({ ...form, inviteCode: e.target.value })
+                    }
+                  />
+                  <p className="text-[11px] text-muted-foreground">
+                    Ce code vous rattache automatiquement à l'établissement.
+                  </p>
                 </div>
 
                 <div className="space-y-1.5">
                   <Label htmlFor="specialty">{specialtyLabel}</Label>
-                  <Input id="specialty" placeholder={specialtyPlaceholder} value={form.specialty} onChange={(e) => setForm({ ...form, specialty: e.target.value })} required />
+                  <Input
+                    id="specialty"
+                    placeholder={specialtyPlaceholder}
+                    value={form.specialty}
+                    onChange={(e) =>
+                      setForm({ ...form, specialty: e.target.value })
+                    }
+                    required
+                  />
                 </div>
 
                 <div className="space-y-1.5">
                   <Label htmlFor="password">Mot de passe</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input id="password" type={showPassword ? "text" : "password"} placeholder="••••••••" className="pl-10 pr-10" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="••••••••"
+                      className="pl-10 pr-10"
+                      value={form.password}
+                      onChange={(e) =>
+                        setForm({ ...form, password: e.target.value })
+                      }
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -237,11 +414,26 @@ const Register = () => {
                   <Label htmlFor="confirm">Confirmer le mot de passe</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input id="confirm" type="password" placeholder="••••••••" className="pl-10" value={form.confirm} onChange={(e) => setForm({ ...form, confirm: e.target.value })} required />
+                    <Input
+                      id="confirm"
+                      type="password"
+                      placeholder="••••••••"
+                      className="pl-10"
+                      value={form.confirm}
+                      onChange={(e) =>
+                        setForm({ ...form, confirm: e.target.value })
+                      }
+                      required
+                    />
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" variant="hero" size="lg">
+                <Button
+                  type="submit"
+                  className="w-full"
+                  variant="hero"
+                  size="lg"
+                >
                   Créer mon compte
                   <ArrowRight className="w-4 h-4" />
                 </Button>
@@ -250,8 +442,13 @@ const Register = () => {
           </AnimatePresence>
 
           <div className="rounded-3xl border border-border bg-secondary p-4 text-sm text-muted-foreground">
-            <p className="font-semibold text-foreground">Vous souhaitez inscrire un élève ?</p>
-            <p>Utilisez le formulaire dédié pour soumettre une demande et laisser l'établissement valider l'inscription.</p>
+            <p className="font-semibold text-foreground">
+              Vous souhaitez inscrire un élève ?
+            </p>
+            <p>
+              Utilisez le formulaire dédié pour soumettre une demande et laisser
+              l'établissement valider l'inscription.
+            </p>
             <Link
               to="/register/inscription"
               className="mt-3 inline-flex rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
@@ -262,7 +459,9 @@ const Register = () => {
 
           <p className="text-center text-sm text-muted-foreground">
             Déjà un compte ?{" "}
-            <Link to="/" className="text-primary font-semibold hover:underline">Se connecter</Link>
+            <Link to="/" className="text-primary font-semibold hover:underline">
+              Se connecter
+            </Link>
           </p>
         </motion.div>
       </div>

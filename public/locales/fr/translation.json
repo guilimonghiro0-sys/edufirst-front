@@ -44,4 +44,14 @@
     "Utilisez le formulaire dédié pour soumettre une demande et laisser l'établissement valider l'inscription"
         : "Utilisez le formulaire dédié pour soumettre une demande et laisser l'établissement valider l'inscription",
     "Ouvrir le formulaire d'inscription" : "Ouvrir le formulaire d'inscription"
+    , "Inscription en cours...": "Inscription en cours...",
+    "Inscription réussie ! Vous pouvez maintenant vous connecter.": "Inscription réussie ! Vous pouvez maintenant vous connecter.",
+    "Erreur lors de l'inscription. Veuillez réessayer.": "Erreur lors de l'inscription. Veuillez réessayer.",
+    "Démarrer l'onboarding": "Démarrer l'onboarding",
+    "Vous souhaitez inscrire un élève ? Utilisez le formulaire dédié pour soumettre une demande et laisser l'établissement valider l'inscription."
+        : "Vous souhaitez inscrire un élève ? Utilisez le formulaire dédié pour soumettre une demande et laisser l'établissement valider l'inscription.",
+    "Choisissez votre profil pour commencer. Les comptes Élèves sont créés par l'Établissement ou le Parent depuis leur tableau de bord."
+        : "Choisissez votre profil pour commencer. Les comptes Élèves sont créés par l'Établissement ou le Parent depuis leur tableau de bord.",
+    "L'inscription d'un établissement se fait via notre assistant d'onboarding en 4 étapes. Vous serez guidé pour fournir les informations nécessaires à la création de votre compte et à la configuration de votre établissement."
+        : "L'inscription d'un établissement se fait via notre assistant d'onboarding en 4 étapes. Vous serez guidé pour fournir les informations nécessaires à la création de votre compte et à la configuration de votre établissement."
 }
